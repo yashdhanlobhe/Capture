@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/navigation_capture"
+        android:icon="@drawable/ic_baseline_capture_24"
+        android:title="@string/capture" />
+    <item
+        android:id="@+id/navigation_local"
+        android:icon="@drawable/ic_baseline_local_airport_24"
+        android:title="@string/local" />
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
@@ -15,5 +22,6 @@
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/settings" />
+
 
 </menu>
