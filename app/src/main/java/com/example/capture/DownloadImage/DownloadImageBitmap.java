@@ -1,9 +1,12 @@
 package com.example.capture.DownloadImage;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.capture.MainActivity;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,8 +16,10 @@ import java.net.URLConnection;
 import static com.example.capture.DownloadImage.SaveImage.saveToSdCard;
 
 public class DownloadImageBitmap {
-    public DownloadImageBitmap(String DownloadUrl , String ImageName){
+    Context context;
+    public DownloadImageBitmap(String DownloadUrl , String ImageName , Context context){
         Log.d("yd" , DownloadUrl);
+        this.context = context;
         new GetImages(DownloadUrl , ImageName).execute();
     }
     private  class GetImages extends AsyncTask<Object , Object , Object>{
@@ -41,7 +46,7 @@ public class DownloadImageBitmap {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             try {
-                saveToSdCard(bitmap , imagename);
+                saveToSdCard(bitmap , imagename , context);
             } catch (IOException e) {
                 e.printStackTrace();
             }

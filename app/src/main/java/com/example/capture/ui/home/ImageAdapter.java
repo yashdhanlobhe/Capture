@@ -56,7 +56,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
             Drawable d = new BitmapDrawable(mContext.getResources(), bitmap);
 
             Picasso.get()
-                    .load(jsonObject1.getString("regular"))
+                    .load(jsonObject1.getString("small"))
                     .placeholder(d)
                     .into(holder.imageView);
 
@@ -88,7 +88,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
                         JSONObject jsonObject = null;
                         jsonObject = (JSONObject) jsonArray.get(getAdapterPosition());
                         JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
-                        new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id"));
+                        new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id") , mcontext);
                     }catch (Exception e){
 
                     }
