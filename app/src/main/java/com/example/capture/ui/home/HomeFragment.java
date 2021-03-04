@@ -3,10 +3,13 @@ package com.example.capture.ui.home;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.BoringLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,14 +58,20 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        initRecyclerView();
-        root.findViewById(R.id.buttonForHomeSearch).setOnClickListener(new View.OnClickListener() {
+//        initRecyclerView();
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View v) {
-                find = search.getText().toString();
-                initRecyclerView();
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                Boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    find = search.getText().toString();
+                    initRecyclerView();
+                    handled = true;
+                }
+                return false;
             }
         });
+
         return root;
     }
     private void initRecyclerView(){
