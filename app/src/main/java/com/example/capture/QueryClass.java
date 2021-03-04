@@ -11,6 +11,6 @@ public class QueryClass {
         if (page.equals("")){
             page = "1";
         }
-        return DeveloperAPI + "search/photos?page="+ page +"1&query=" +search + "&" +  APIKey;
+        return DeveloperAPI + "search/photos?page="+ page +page+"&query=" +search + "&" +  APIKey;
     }
 }

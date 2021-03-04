@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +48,7 @@ public class HomeFragment extends Fragment {
     EditText search;
     Context mContext;
     RequestQueue queue;
+    int currentPageNumber = 1;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -58,7 +60,6 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-//        initRecyclerView();
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -67,15 +68,38 @@ public class HomeFragment extends Fragment {
                     find = search.getText().toString();
                     initRecyclerView();
                     handled = true;
+
+                    search.clearFocus();
+                    InputMethodManager in = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(search.getWindowToken(), 0);
+
+                    currentPageNumber = 1;
                 }
-                return false;
+                return handled;
             }
         });
 
+        root.findViewById(R.id.idNextButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentPageNumber +=1;
+                initRecyclerView();
+            }
+        });
+        root.findViewById(R.id.idBackButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentPageNumber -=1;
+                if (currentPageNumber<1) {
+                    currentPageNumber = 1;
+                }
+                initRecyclerView();
+            }
+        });
         return root;
     }
     private void initRecyclerView(){
-        url= getQueryForSearchingKeyword(find , "1");
+        url= getQueryForSearchingKeyword(find , String.valueOf(currentPageNumber));
         setRecyclerView(recyclerView , url , mContext);
     }
     private void setRecyclerView(RecyclerView recyclerView , String query , Context context){
