@@ -1,6 +1,9 @@
 package com.example.capture.ui.home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import xyz.belvi.blurhash.BlurHashDecoder;
+
 public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapterHolder> {
     JSONArray jsonArray;
     Context mContext;
@@ -44,9 +49,17 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
         try {
             jsonObject = (JSONObject) jsonArray.get(position);
             JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
-//            Glide.with(holder.mcontext).load(jsonObject1.getString("regular")).into(holder.imageView);
-            Picasso.get().load(jsonObject1.getString("regular")).into(holder.imageView);
-            Log.d("yd", jsonObject1.getString("regular"));
+
+            Bitmap bitmap = (Bitmap) BlurHashDecoder
+                    .INSTANCE.decode(jsonObject
+                    .getString("blur_hash"), 20, 12 ,1.0f , false , null );
+            Drawable d = new BitmapDrawable(mContext.getResources(), bitmap);
+
+            Picasso.get()
+                    .load(jsonObject1.getString("regular"))
+                    .placeholder(d)
+                    .into(holder.imageView);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
