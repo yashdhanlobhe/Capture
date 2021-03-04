@@ -1,6 +1,7 @@
 package com.example.capture.ui.home;
 
 import android.app.DownloadManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,48 +33,54 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.capture.GetJSONArray.setRecyclerView;
+import static com.example.capture.QueryClass.getQueryForSearchingKeyword;
+
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
-    RequestQueue queue;
-    String url;
+    public  static String find="random";
+    public static  String url  ;
+    public static ImageAdapter imageAdapter;
     EditText search;
-    String find;
+    Context mContext;
+    RequestQueue queue;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        queue = Volley.newRequestQueue(container.getContext());
         recyclerView= root.findViewById(R.id.recyclerViewHome);
         search = root.findViewById(R.id.searchBoxHome);
+        mContext = container.getContext();
+        queue= Volley.newRequestQueue(mContext);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
         initRecyclerView();
-
-
         root.findViewById(R.id.buttonForHomeSearch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                find = search.getText().toString();
                 initRecyclerView();
             }
         });
         return root;
     }
     private void initRecyclerView(){
-        find = search.getText().toString();
-        if (find.equals("")){
-            find = "cartoon";
-        }
-        url= "https://api.unsplash.com/search/photos?page=1&query="+find+"&client_id=z09b28_UcCHK5ULO8pE0jnBCYtErAnhR9Y_l3BkCKOI";
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        url= getQueryForSearchingKeyword(find , "1");
+        setRecyclerView(recyclerView , url , mContext);
+    }
+    private void setRecyclerView(RecyclerView recyclerView , String query , Context context){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, query, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 JSONArray jsonArray = new JSONArray();
                 try {
                     jsonArray = response.getJSONArray("results");
-                    Log.d("yd" , jsonArray.toString());
-                    ImageAdapter imageAdapter = new ImageAdapter(jsonArray);
-                    recyclerView.setAdapter(imageAdapter);
+                    imageAdapter = new ImageAdapter(jsonArray);
+                    setView();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -85,5 +92,15 @@ public class HomeFragment extends Fragment {
             }
         });
         queue.add(objectRequest);
+    }
+
+    private void setView(){
+        recyclerView.setAdapter(imageAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setView();
     }
 }

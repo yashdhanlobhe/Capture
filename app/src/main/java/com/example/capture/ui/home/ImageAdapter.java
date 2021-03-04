@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.capture.DownloadImage.DownloadImageBitmap;
 import com.example.capture.R;
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior;
 import com.squareup.picasso.Picasso;
@@ -59,10 +61,26 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
     public class ImageAdapterHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         Context mcontext;
+        Button downloadButton;
         public ImageAdapterHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewForItem);
             mcontext = itemView.getContext();
+            downloadButton = itemView.findViewById(R.id.downloadButton);
+
+            downloadButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        JSONObject jsonObject = null;
+                        jsonObject = (JSONObject) jsonArray.get(getAdapterPosition());
+                        JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
+                        new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id"));
+                    }catch (Exception e){
+
+                    }
+                }
+            });
         }
     }
 }
