@@ -2,6 +2,7 @@ package com.example.capture;
 
 import android.os.Bundle;
 
+import com.example.capture.Services.GetStorageFileNames;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createNotificationChannel(this);
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
+        GetStorageFileNames.GetDownloadedFilesNames();
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications ,R.id.navigation_capture , R.id.navigation_local)
                 .build();

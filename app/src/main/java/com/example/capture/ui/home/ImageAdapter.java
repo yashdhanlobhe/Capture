@@ -1,5 +1,6 @@
 package com.example.capture.ui.home;
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.capture.DownloadImage.DownloadImageBitmap;
+import com.example.capture.DownloadImage.Permission;
+import com.example.capture.MainActivity;
 import com.example.capture.R;
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior;
 import com.squareup.picasso.Picasso;
@@ -27,6 +30,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import xyz.belvi.blurhash.BlurHashDecoder;
+
+import static com.example.capture.DownloadImage.Permission.checkPermission;
 
 public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapterHolder> {
     JSONArray jsonArray;
@@ -84,12 +89,15 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
             downloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
-                        JSONObject jsonObject = null;
-                        jsonObject = (JSONObject) jsonArray.get(getAdapterPosition());
-                        JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
-                        new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id") , mcontext);
-                    }catch (Exception e){
+                    if(checkPermission(mcontext , Manifest.permission.WRITE_EXTERNAL_STORAGE )){
+                        try {
+                            JSONObject jsonObject = null;
+                            jsonObject = (JSONObject) jsonArray.get(getAdapterPosition());
+                            JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
+                            new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id") , mcontext);
+                        }catch (Exception e){
+
+                        }
 
                     }
                 }
