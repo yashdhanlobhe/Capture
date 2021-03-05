@@ -48,6 +48,7 @@ public class HomeFragment extends Fragment {
     EditText search;
     Context mContext;
     RequestQueue queue;
+    View nextBtn;
     int currentPageNumber = 1;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class HomeFragment extends Fragment {
         search = root.findViewById(R.id.searchBoxHome);
         mContext = container.getContext();
         queue= Volley.newRequestQueue(mContext);
-
+        nextBtn = root.findViewById(R.id.linearLayoutHomeFrag);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -66,7 +67,7 @@ public class HomeFragment extends Fragment {
                 Boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
                     find = search.getText().toString();
-                    initRecyclerView();
+                    initRecyclerView(root);
                     handled = true;
 
                     search.clearFocus();
@@ -83,7 +84,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 currentPageNumber +=1;
-                initRecyclerView();
+                initRecyclerView(root);
             }
         });
         root.findViewById(R.id.idBackButton).setOnClickListener(new View.OnClickListener() {
@@ -93,12 +94,12 @@ public class HomeFragment extends Fragment {
                 if (currentPageNumber<1) {
                     currentPageNumber = 1;
                 }
-                initRecyclerView();
+                initRecyclerView(root);
             }
         });
         return root;
     }
-    private void initRecyclerView(){
+    private void initRecyclerView(View root){
         url= getQueryForSearchingKeyword(find , String.valueOf(currentPageNumber));
         setRecyclerView(recyclerView , url , mContext);
     }
@@ -113,6 +114,7 @@ public class HomeFragment extends Fragment {
                 try {
                     jsonArray = response.getJSONArray("results");
                     imageAdapter = new ImageAdapter(jsonArray);
+
                     setView();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -129,6 +131,9 @@ public class HomeFragment extends Fragment {
 
     private void setView(){
         recyclerView.setAdapter(imageAdapter);
+        if (imageAdapter != null){
+            nextBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
