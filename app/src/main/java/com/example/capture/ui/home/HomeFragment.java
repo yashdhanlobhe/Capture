@@ -37,11 +37,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.example.capture.GetJSONArray.setRecyclerView;
 import static com.example.capture.QueryClass.getQueryForSearchingKeyword;
 
 public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
+    TextView currentPage;
     public  static String find="random";
     public static  String url  ;
     public static ImageAdapter imageAdapter;
@@ -49,12 +49,13 @@ public class HomeFragment extends Fragment {
     Context mContext;
     RequestQueue queue;
     View nextBtn;
-    int currentPageNumber = 1;
+    public static  int currentPageNumber = 1 , TotalPages;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView= root.findViewById(R.id.recyclerViewHome);
         search = root.findViewById(R.id.searchBoxHome);
+        currentPage = root.findViewById(R.id.currentPageID);
         mContext = container.getContext();
         queue= Volley.newRequestQueue(mContext);
         nextBtn = root.findViewById(R.id.linearLayoutHomeFrag);
@@ -84,6 +85,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 currentPageNumber +=1;
+                if (currentPageNumber > TotalPages ){
+                    currentPageNumber = TotalPages;
+                }
                 initRecyclerView(root);
             }
         });
@@ -94,6 +98,7 @@ public class HomeFragment extends Fragment {
                 if (currentPageNumber<1) {
                     currentPageNumber = 1;
                 }
+
                 initRecyclerView(root);
             }
         });
@@ -113,7 +118,8 @@ public class HomeFragment extends Fragment {
                 JSONArray jsonArray = new JSONArray();
                 try {
                     jsonArray = response.getJSONArray("results");
-                    imageAdapter = new ImageAdapter(jsonArray);
+                    TotalPages = Integer.parseInt(response.getString("total_pages"));
+                    imageAdapter = new ImageAdapter(jsonArray );
 
                     setView();
                 } catch (JSONException e) {
@@ -130,6 +136,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setView(){
+        currentPage.setText(currentPageNumber+ " - " + TotalPages);
         recyclerView.setAdapter(imageAdapter);
         if (imageAdapter != null){
             nextBtn.setVisibility(View.VISIBLE);

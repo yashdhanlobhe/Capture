@@ -1,6 +1,7 @@
 package com.example.capture.ui.home;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -37,6 +38,8 @@ import java.util.ArrayList;
 import xyz.belvi.blurhash.BlurHashDecoder;
 
 import static com.example.capture.DownloadImage.Permission.checkPermission;
+import static com.example.capture.ui.home.HomeFragment.TotalPages;
+import static com.example.capture.ui.home.HomeFragment.currentPageNumber;
 
 public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapterHolder> {
     JSONArray jsonArray;
@@ -44,6 +47,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
 
     public ImageAdapter(JSONArray jsonArray){
         this.jsonArray = jsonArray;
+
     }
     @NonNull
     @Override
@@ -59,7 +63,6 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
         try {
             jsonObject = (JSONObject) jsonArray.get(position);
             JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
-
             holder.textView.setText(jsonObject
                     .getString("alt_description"));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && GetStorageFileNames.DownloadedFilesName.contains(jsonObject.getString("id")+ ".jpg")) {
@@ -91,7 +94,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
         ImageView imageView;
         Context mcontext;
         Button downloadButton;
-        TextView textView;
+        TextView textView ;
         public ImageAdapterHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewForItem);
@@ -110,7 +113,6 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
                         }catch (Exception e){
 
                         }
-
                     }
                 }
             });

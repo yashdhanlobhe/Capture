@@ -17,32 +17,44 @@
         android:inputType="text"
         android:maxLines="1"
         />
+
     <LinearLayout
-        android:visibility="invisible"
         android:id="@+id/linearLayoutHomeFrag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recyclerViewHome"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <Button
             android:id="@+id/idBackButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:foreground="@drawable/ic_baseline_arrow_left_24"
+            />
+        <TextView
+            android:id="@+id/currentPageID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Back"
-            android:textColor="@color/white" />
-
+            android:textColor="@color/grey_white"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:text="1-100"
+            android:layout_marginHorizontal="20dp"
+            android:layout_gravity="center_vertical"
+            />
         <Button
+            android:foreground="@drawable/ic_baseline_arrow_right_24"
             android:id="@+id/idNextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:text="Next"
-            android:textColor="@color/white" />
+/>
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@id/searchBoxHome"
         android:id="@+id/recyclerViewHome"
