@@ -6,6 +6,8 @@ import android.media.MediaScannerConnection;
 import android.os.Environment;
 import android.util.Log;
 
+import com.example.capture.Services.GetStorageFileNames;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,6 +30,7 @@ public class SaveImage {
             outputStream.flush();
             outputStream.close();
             stored = "success";
+            GetStorageFileNames.GetDownloadedFilesNames().add(filename + ".jpg");
             MediaScannerConnection.scanFile(context, new String[] { file.getPath() }, new String[] { "image/jpeg" }, null);
         }catch (Exception e){
             e.printStackTrace();

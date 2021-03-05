@@ -26,14 +26,14 @@
     <fragment
         android:id="@+id/navigation_capture"
         android:name="com.example.capture.ui.capture.CaptureFragment"
-        android:label="@string/title_notifications"
+        android:label="Capture"
         tools:layout="@layout/fragment_discover" />
 
-    <fragment
-        android:id="@+id/navigation_local"
-        android:name="com.example.capture.ui.local.LocalFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_local" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_local"-->
+<!--        android:name="com.example.capture.ui.local.LocalFragment"-->
+<!--        android:label="@string/title_notifications"-->
+<!--        tools:layout="@layout/fragment_local" />-->
 
 
 </navigation>

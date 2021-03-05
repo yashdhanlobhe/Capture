@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:minHeight="200dp"
-        android:id="@+id/imageViewForItem"
+    android:layout_height="wrap_content"
+    android:elevation="15dp"
+    app:cardCornerRadius="15dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/grey_black"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/downloadButton"
-        android:text="Download"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewForItem" />
+        <ImageView
+            android:id="@+id/imageViewForItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/imageTitleItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:maxLength="45"
+            android:maxLines="1"
+            android:text="title"
+            android:textColor="@color/grey_white"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewForItem" />
+
+        <Button
+            android:id="@+id/downloadButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/black"
+            android:foreground="@drawable/ic_baseline_arrow_downward_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewForItem" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

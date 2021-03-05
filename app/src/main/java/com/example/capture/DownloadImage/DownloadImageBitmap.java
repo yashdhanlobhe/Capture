@@ -17,6 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.capture.MainActivity;
 import com.example.capture.R;
+import com.example.capture.Services.GetStorageFileNames;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -32,12 +33,17 @@ public class DownloadImageBitmap {
     int id ;
     public DownloadImageBitmap(String DownloadUrl , String ImageName , Context context){
         this.context = context;
-        Toast.makeText(context , "Downloading Started " , Toast.LENGTH_SHORT).show();
-        id = (int) Math.ceil(Math.random()*10);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            sendNotifiacaiton(ImageName);
+        if (GetStorageFileNames.GetDownloadedFilesNames().contains(ImageName + ".jpg")){
+            Toast.makeText(context , "Already Downloaded ! " , Toast.LENGTH_SHORT).show();
         }
-        new GetImages(DownloadUrl , ImageName).execute();
+        else {
+            Toast.makeText(context , "Downloading Started " , Toast.LENGTH_SHORT).show();
+            id = (int) Math.ceil(Math.random()*10);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                sendNotifiacaiton(ImageName);
+            }
+            new GetImages(DownloadUrl , ImageName).execute();
+        }
     }
     private  class GetImages extends AsyncTask<Object , Integer , Object>{
         private String requestUrl, imagename;
