@@ -50,7 +50,7 @@
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="10dp"
                 android:layout_margin="15dp"
-                android:id="@+id/mountainCardView"
+                android:id="@+id/TechCardview"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 >

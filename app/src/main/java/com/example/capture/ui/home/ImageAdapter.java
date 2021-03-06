@@ -1,13 +1,11 @@
 package com.example.capture.ui.home;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,30 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.capture.DownloadImage.DownloadImageBitmap;
-import com.example.capture.DownloadImage.Permission;
-import com.example.capture.MainActivity;
 import com.example.capture.R;
 import com.example.capture.Services.GetStorageFileNames;
-import com.google.android.material.behavior.HideBottomViewOnScrollBehavior;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import xyz.belvi.blurhash.BlurHashDecoder;
 
 import static com.example.capture.DownloadImage.Permission.checkPermission;
-import static com.example.capture.ui.home.HomeFragment.TotalPages;
-import static com.example.capture.ui.home.HomeFragment.currentPageNumber;
 
 public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapterHolder> {
     JSONArray jsonArray;
