@@ -31,16 +31,17 @@ import org.json.JSONObject;
 import static com.example.capture.QueryClass.getQueryForSearchingKeyword;
 
 public class HomeFragment extends Fragment {
-    public  static String find="random";
+    public  static String find="travel";
     public static  String url  ;
     public static ImageAdapter imageAdapter;
     public static  int currentPageNumber = 1 , TotalPages;
     RecyclerView recyclerView;
-    TextView currentPage;
+    TextView currentPage , instruction;
     EditText search;
     Context mContext;
     RequestQueue queue;
-    View nextBtn;
+    View linearLayoutHomeFrag;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,9 +49,10 @@ public class HomeFragment extends Fragment {
         recyclerView= root.findViewById(R.id.recyclerViewHome);
         search = root.findViewById(R.id.searchBoxHome);
         currentPage = root.findViewById(R.id.currentPageID);
+        instruction = root.findViewById(R.id.instructionTextview);
         mContext = container.getContext();
         queue= Volley.newRequestQueue(mContext);
-        nextBtn = root.findViewById(R.id.linearLayoutHomeFrag);
+        linearLayoutHomeFrag = root.findViewById(R.id.linearLayoutHomeFrag);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -109,6 +111,12 @@ public class HomeFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 JSONArray jsonArray = new JSONArray();
                 try {
+                    if (response.getString("total").equals("0")){
+                        instruction.setText("Not Found :(");
+                        linearLayoutHomeFrag.setVisibility(View.INVISIBLE);
+                    }else {
+                        linearLayoutHomeFrag.setVisibility(View.VISIBLE);
+                    }
                     jsonArray = response.getJSONArray("results");
                     TotalPages = Integer.parseInt(response.getString("total_pages"));
                     imageAdapter = new ImageAdapter(jsonArray );
@@ -130,14 +138,14 @@ public class HomeFragment extends Fragment {
     private void setView(){
         currentPage.setText(currentPageNumber+ " - " + TotalPages);
         recyclerView.setAdapter(imageAdapter);
-        if (imageAdapter != null){
-            nextBtn.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         setView();
+        if (imageAdapter != null ){
+            linearLayoutHomeFrag.setVisibility(View.VISIBLE);
+        }
     }
 }
