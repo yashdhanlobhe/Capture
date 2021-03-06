@@ -63,8 +63,9 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
         try {
             jsonObject = (JSONObject) jsonArray.get(position);
             JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
-            holder.textView.setText(jsonObject
-                    .getString("alt_description"));
+            holder.textView.setText(jsonObject.getString("alt_description"));
+            holder.pixel.setText("Pixel: " + jsonObject.getString("width") + "x" + jsonObject.getString("height"));
+            holder.size.setText("Size: "+ getImgSize(jsonObject.getString("width") ,jsonObject.getString("height"))+ " MB");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && GetStorageFileNames.DownloadedFilesName.contains(jsonObject.getString("id")+ ".jpg")) {
                 holder.downloadButton.setForeground(ContextCompat.getDrawable(mContext , R.drawable.ic_baseline_done_24));
             }
@@ -85,6 +86,16 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
 
     }
 
+    private String getImgSize(String width, String height) {
+        Float x = Float.parseFloat(width.substring(0 ,2));
+        Float y = Float.parseFloat(height.substring(0,2));
+        try{
+            return String.valueOf(x * y * 0.003).substring(0, 4);
+        }catch (Exception e){
+            return String.valueOf(x * y * 0.003);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return jsonArray.length();
@@ -94,13 +105,15 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
         ImageView imageView;
         Context mcontext;
         Button downloadButton;
-        TextView textView ;
+        TextView textView , pixel , size;
         public ImageAdapterHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageViewForItem);
             mcontext = itemView.getContext();
             downloadButton = itemView.findViewById(R.id.downloadButton);
             textView = itemView.findViewById(R.id.imageTitleItem);
+            pixel = itemView.findViewById(R.id.imagePixelItem);
+            size = itemView.findViewById(R.id.imageSizeItem);
             downloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

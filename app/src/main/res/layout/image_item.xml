@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="15dp"
-    app:cardCornerRadius="15dp">
+    app:cardCornerRadius="5dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/grey_black"
         android:layout_width="match_parent"
@@ -22,19 +22,49 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:layout_marginTop="2dp"
             android:id="@+id/imageTitleItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="8dp"
             android:maxLength="45"
             android:maxLines="1"
             android:text="title"
+            android:textAllCaps="true"
             android:textColor="@color/grey_white"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewForItem" />
+
+        <TextView
+            android:id="@+id/imagePixelItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:maxLength="45"
+            android:maxLines="1"
+            android:text="Pixel"
+            android:textColor="@color/grey_white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageTitleItem" />
+
+        <TextView
+            android:id="@+id/imageSizeItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:maxLength="45"
+            android:maxLines="1"
+            android:text="Size"
+            android:textColor="@color/grey_white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imagePixelItem"
+            app:layout_constraintTop_toBottomOf="@+id/imageTitleItem" />
+
 
         <Button
             android:id="@+id/downloadButton"

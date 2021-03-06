@@ -1,10 +1,7 @@
 package com.example.capture.ui.home;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.BoringLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +9,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.example.capture.R;
 
 import org.json.JSONArray;
@@ -40,16 +31,17 @@ import org.json.JSONObject;
 import static com.example.capture.QueryClass.getQueryForSearchingKeyword;
 
 public class HomeFragment extends Fragment {
-    RecyclerView recyclerView;
-    TextView currentPage;
     public  static String find="random";
     public static  String url  ;
     public static ImageAdapter imageAdapter;
+    public static  int currentPageNumber = 1 , TotalPages;
+    RecyclerView recyclerView;
+    TextView currentPage;
     EditText search;
     Context mContext;
     RequestQueue queue;
     View nextBtn;
-    public static  int currentPageNumber = 1 , TotalPages;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
