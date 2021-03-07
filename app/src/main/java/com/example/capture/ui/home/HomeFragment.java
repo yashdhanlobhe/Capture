@@ -1,5 +1,6 @@
 package com.example.capture.ui.home;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,7 @@ public class HomeFragment extends Fragment {
     EditText search;
     Context mContext;
     RequestQueue queue;
+    ProgressDialog pd;
     View linearLayoutHomeFrag;
 
 
@@ -52,6 +55,8 @@ public class HomeFragment extends Fragment {
         currentPage = root.findViewById(R.id.currentPageID);
         instruction = root.findViewById(R.id.instructionTextview);
         mContext = container.getContext();
+        pd = new ProgressDialog(mContext);
+        pd.setMessage("Loading...");
         queue= Volley.newRequestQueue(mContext);
         linearLayoutHomeFrag = root.findViewById(R.id.linearLayoutHomeFrag);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
@@ -62,14 +67,13 @@ public class HomeFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 Boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
-                    Log.d("yd " , find);
-                    find = search.getText().toString();
-                    initRecyclerView(root);
-                    handled = true;
                     search.clearFocus();
                     InputMethodManager in = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     in.hideSoftInputFromWindow(search.getWindowToken(), 0);
-
+                    pd.show();
+                    find = search.getText().toString();
+                    initRecyclerView(root);
+                    handled = true;
                     currentPageNumber = 1;
                 }
                 return handled;
@@ -79,6 +83,7 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.idNextButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pd.show();
                 currentPageNumber +=1;
                 if (currentPageNumber > TotalPages ){
                     currentPageNumber = TotalPages;
@@ -89,6 +94,7 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.idBackButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pd.show();
                 currentPageNumber -=1;
                 if (currentPageNumber<1) {
                     currentPageNumber = 1;
@@ -137,6 +143,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setView(){
+        pd.dismiss();
         currentPage.setText(currentPageNumber+ " - " + TotalPages);
         recyclerView.setAdapter(imageAdapter);
     }

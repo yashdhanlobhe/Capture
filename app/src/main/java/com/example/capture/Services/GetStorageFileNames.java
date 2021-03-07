@@ -11,15 +11,12 @@ public class GetStorageFileNames {
     
     public static ArrayList<String> GetDownloadedFilesNames(){
         DownloadedFilesName = new ArrayList<>();
-
         try{
             File loc = new File(Environment.getExternalStorageDirectory().getPath() + "/Capture");
             for (File f : loc.listFiles()) {
                 DownloadedFilesName.add(f.getName());
             }
-            Log.d("yd", DownloadedFilesName.toString());
         }catch (Exception e){
-
         }
         return  DownloadedFilesName;
     }

@@ -16,7 +16,7 @@ import java.io.IOException;
 public class SaveImage {
     public static  String saveToSdCard(Bitmap bitmap , String filename , Context context) throws IOException {
         String stored = null;
-        Log.d("yd" , bitmap.toString());
+
         File sdcard = Environment.getExternalStorageDirectory();
 
         File folder = new File(sdcard.getAbsolutePath() , "/Capture");
@@ -30,7 +30,7 @@ public class SaveImage {
             outputStream.flush();
             outputStream.close();
             stored = "success";
-            GetStorageFileNames.GetDownloadedFilesNames().add(filename + ".jpg");
+//            GetStorageFileNames.GetDownloadedFilesNames().add(filename + ".jpg");
             MediaScannerConnection.scanFile(context, new String[] { file.getPath() }, new String[] { "image/jpeg" }, null);
         }catch (Exception e){
             e.printStackTrace();

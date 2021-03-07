@@ -6,12 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -26,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import xyz.belvi.blurhash.BlurHashDecoder;
 
 import static com.example.capture.DownloadImage.Permission.checkPermission;
@@ -33,10 +37,10 @@ import static com.example.capture.DownloadImage.Permission.checkPermission;
 public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapterHolder> {
     JSONArray jsonArray;
     Context mContext;
-
+    ArrayList<String> downloaded ;
     public ImageAdapter(JSONArray jsonArray){
         this.jsonArray = jsonArray;
-
+        downloaded = new ArrayList<>();
     }
     @NonNull
     @Override
@@ -106,15 +110,31 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
             downloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(checkPermission(mcontext , Manifest.permission.WRITE_EXTERNAL_STORAGE )){
-                        try {
-                            JSONObject jsonObject = null;
-                            jsonObject = (JSONObject) jsonArray.get(getAdapterPosition());
-                            JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
-                            new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id") , mcontext);
-                        }catch (Exception e){
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = (JSONObject) jsonArray.get(getAdapterPosition());
+                        JSONObject jsonObject1 = jsonObject.getJSONObject("urls");
+                        String name = jsonObject.getString("id") + ".jpg";
 
+                        if (GetStorageFileNames.GetDownloadedFilesNames().contains(name)|| downloaded.contains(name) ){
+                            Log.d("yd1" ,name+ "  here" );
+                            Toast.makeText(mcontext , "Already Downloaded ! " , Toast.LENGTH_SHORT).show();
                         }
+                        else {
+                            Log.d("yd1" ,name);
+
+                            if(checkPermission(mcontext , Manifest.permission.WRITE_EXTERNAL_STORAGE )){
+                                try
+                                {   downloaded.add(name);
+                                    GetStorageFileNames.GetDownloadedFilesNames().add(name);
+                                    new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id") , mcontext);
+                                }
+                                catch (Exception e)
+                                {
+                                }
+                            }
+                        }
+                    } catch (JSONException e) {
                     }
                 }
             });

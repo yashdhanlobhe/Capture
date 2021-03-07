@@ -37,6 +37,7 @@ public class DownloadImageBitmap {
             Toast.makeText(context , "Already Downloaded ! " , Toast.LENGTH_SHORT).show();
         }
         else {
+            GetStorageFileNames.GetDownloadedFilesNames().add(ImageName + ".jpg");
             Toast.makeText(context , "Downloading Started " , Toast.LENGTH_SHORT).show();
             id = (int) Math.ceil(Math.random()*10);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -58,7 +59,6 @@ public class DownloadImageBitmap {
             try{
                 URL url = new URL(requestUrl);
                 URLConnection conn = url.openConnection();
-                mNotificationManager.notify(id , mBuilder.build());
                 bitmap = BitmapFactory.decodeStream(conn.getInputStream());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -91,5 +91,6 @@ public class DownloadImageBitmap {
         mBuilder.setContentTitle("Downloading " + imageName+ ".jpg" )
                 .setContentText("Download in progress...")
                 .setSmallIcon(R.drawable.ic_baseline_cloud_download_24);
+        mNotificationManager.notify(id , mBuilder.build());
     }
 }
