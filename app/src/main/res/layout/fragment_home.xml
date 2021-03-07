@@ -9,11 +9,10 @@
 
     <EditText
         android:layout_margin="15dp"
+        android:singleLine="true"
         android:id="@+id/searchBoxHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeActionId="666"
-        android:imeActionLabel="Search"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:maxLines="1"

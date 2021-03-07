@@ -2,6 +2,7 @@ package com.example.capture.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,10 +62,10 @@ public class HomeFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 Boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    Log.d("yd " , find);
                     find = search.getText().toString();
                     initRecyclerView(root);
                     handled = true;
-
                     search.clearFocus();
                     InputMethodManager in = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     in.hideSoftInputFromWindow(search.getWindowToken(), 0);
