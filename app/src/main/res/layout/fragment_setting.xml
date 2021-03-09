@@ -16,30 +16,34 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textSize="24sp"
-            android:textColor="@color/main_text_color"
-            android:textStyle="bold"
             android:layout_margin="10dp"
+            android:text="Settings"
+            android:textColor="@color/main_text_color"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <Switch
             android:id="@+id/darkModeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Dark Mode"
-            android:textSize="18sp"
-            android:textColor="@color/main_text_color"
             android:layout_marginVertical="10dp"
+            android:text="Dark Mode"
+            android:textColor="@color/main_text_color"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -61,8 +65,8 @@
             android:layout_marginVertical="10dp"
             android:text="storage/capture"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/darkModeSwitch"
-            app:layout_constraintTop_toBottomOf="@+id/darkModeSwitch" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView1"
+            app:layout_constraintEnd_toEndOf="@+id/darkModeSwitch" />
 
         <TextView
             android:id="@+id/textView3"
@@ -83,8 +87,8 @@
             android:layout_marginVertical="10dp"
             android:text="1.0"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/textView7"
@@ -104,6 +108,7 @@
             android:layout_marginVertical="10dp"
             android:background="@drawable/githublogo"
             android:backgroundTint="@color/main_text_color"
+            android:elevation="15dp"
             app:layout_constraintEnd_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -126,11 +131,12 @@
             android:layout_width="33dp"
             android:layout_height="30dp"
             android:layout_marginVertical="10dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="44dp"
             android:layout_marginLeft="28dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/linkedinlogo"
             android:backgroundTint="@color/main_text_color"
+            android:elevation="15dp"
             app:layout_constraintStart_toEndOf="@+id/instalogo"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -142,8 +148,24 @@
             android:layout_marginVertical="10dp"
             android:background="@drawable/instalogo"
             android:backgroundTint="@color/main_text_color"
+            android:elevation="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <ImageView
+            android:id="@+id/twitterlogo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginRight="44dp"
+            android:background="@drawable/twitterlogo"
+            android:backgroundTint="@color/main_text_color"
+            android:elevation="15dp"
+            app:layout_constraintEnd_toStartOf="@+id/instalogo"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,6 +49,13 @@ public class SettingsFragment extends Fragment {
                         Uri.parse("https://github.com/billion-yash")));
             }
         });
+        root.findViewById(R.id.twitterlogo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://twitter.com/dhanlobhe_yash")));
+            }
+        });
         return root;
     }
     public void openLinkedInPage(String linkedId) {
