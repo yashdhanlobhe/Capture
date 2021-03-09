@@ -7,7 +7,7 @@
     android:elevation="15dp"
     app:cardCornerRadius="5dp">
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/grey_black"
+        android:background="@color/RecyclerViewBackColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -27,11 +27,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:maxLength="45"
+            android:maxLength="40"
             android:maxLines="1"
             android:text="title"
             android:textAllCaps="true"
-            android:textColor="@color/grey_white"
+            android:textColor="@color/main_text_color"
             android:textSize="12sp"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
             android:maxLength="40"
             android:maxLines="1"
             android:text="Pixel"
-            android:textColor="@color/grey_white"
+            android:textColor="@color/main_text_color"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
             android:maxLength="45"
             android:maxLines="1"
             android:text="Size"
-            android:textColor="@color/grey_white"
+            android:textColor="@color/main_text_color"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imagePixelItem"

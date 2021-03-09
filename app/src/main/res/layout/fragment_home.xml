@@ -17,7 +17,7 @@
         android:inputType="text"
         android:maxLines="1"
         android:background="@drawable/edit_text_background"
-        android:hint="Search Photos"
+        android:hint="Search Photos (eg. city , light , lion)"
         android:elevation="15dp"
         android:padding="10dp"
         android:drawableLeft="@drawable/ic_baseline_search_24"
@@ -39,7 +39,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:foreground="@drawable/ic_baseline_arrow_left_24"
+            android:background="@drawable/ic_baseline_arrow_left_24"
             />
         <TextView
             android:id="@+id/currentPageID"
@@ -53,7 +53,7 @@
             android:layout_gravity="center_vertical"
             />
         <Button
-            android:foreground="@drawable/ic_baseline_arrow_right_24"
+            android:background="@drawable/ic_baseline_arrow_right_24"
             android:id="@+id/idNextButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -70,7 +70,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Search Whatever You Want"
+        android:text="Search Photos You Want"
         android:textStyle="bold"
         android:id="@+id/instructionTextview"
         android:gravity="center"

@@ -12,4 +12,7 @@
     <color name="grey_black">#323232</color>
     <color name="grey_white">#B3B3B3</color>
     <color name="main_green">#1DB954</color>
+    <color name="RecyclerViewBackColor">#ffffff</color>
+    <color name="EditTextColor">#ffffff</color>
+    <color name="main_text_color">#000000</color>
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="RecyclerViewBackColor">#323232</color>
+    <color name="EditTextColor">#323232</color>
+    <color name="main_text_color">#B3B3B3</color>
+</resources>
