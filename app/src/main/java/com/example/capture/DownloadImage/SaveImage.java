@@ -14,15 +14,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class SaveImage {
-    public static  String saveToSdCard(Bitmap bitmap , String filename , Context context) throws IOException {
+    public static  String saveToSdCard(Bitmap bitmap , File file , Context context) throws IOException {
         String stored = null;
 
-        File sdcard = Environment.getExternalStorageDirectory();
 
-        File folder = new File(sdcard.getAbsolutePath() , "/Capture");
-
-        folder.mkdir();
-        File file = new File(folder.getAbsoluteFile(), filename + ".jpg") ;
 
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
