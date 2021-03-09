@@ -67,6 +67,7 @@ public class HomeFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 Boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                    currentPageNumber = 1;
                     search.clearFocus();
                     InputMethodManager in = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     in.hideSoftInputFromWindow(search.getWindowToken(), 0);
@@ -74,7 +75,6 @@ public class HomeFragment extends Fragment {
                     find = search.getText().toString();
                     initRecyclerView(root);
                     handled = true;
-                    currentPageNumber = 1;
                 }
                 return handled;
             }
@@ -113,10 +113,11 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(20);
         recyclerView.setDrawingCacheEnabled(true);
+
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, query, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                JSONArray jsonArray = new JSONArray();
+                JSONArray jsonArray;
                 try {
                     if (response.getString("total").equals("0")){
                         instruction.setText("Not Found :(");
@@ -127,7 +128,6 @@ public class HomeFragment extends Fragment {
                     jsonArray = response.getJSONArray("results");
                     TotalPages = Integer.parseInt(response.getString("total_pages"));
                     imageAdapter = new ImageAdapter(jsonArray );
-
                     setView();
                 } catch (JSONException e) {
                     e.printStackTrace();

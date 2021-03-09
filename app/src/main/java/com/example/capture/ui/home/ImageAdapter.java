@@ -117,11 +117,9 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
                         String name = jsonObject.getString("id") + ".jpg";
 
                         if (GetStorageFileNames.GetDownloadedFilesNames().contains(name)|| downloaded.contains(name) ){
-                            Log.d("yd1" ,name+ "  here" );
                             Toast.makeText(mcontext , "Already Downloaded ! " , Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Log.d("yd1" ,name);
 
                             if(checkPermission(mcontext , Manifest.permission.WRITE_EXTERNAL_STORAGE )){
                                 try
