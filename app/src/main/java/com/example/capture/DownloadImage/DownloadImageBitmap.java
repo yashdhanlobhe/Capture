@@ -132,7 +132,6 @@ public class DownloadImageBitmap {
             mBuilder.setContentText(MB + "." + KB + " MB" +" Downloaded" );
             mBuilder.setProgress(100 , (values[0]*100/values[1]), false);
             mNotificationManager.notify(id , mBuilder.build());
-
         }
 
         @Override
