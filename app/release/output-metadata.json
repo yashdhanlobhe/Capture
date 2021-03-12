@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.capture",
+  "applicationId": "com.boss.capture",
   "variantName": "processReleaseResources",
   "elements": [
     {

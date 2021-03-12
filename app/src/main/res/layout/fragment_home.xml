@@ -22,8 +22,8 @@
         android:padding="10dp"
         android:drawableLeft="@drawable/ic_baseline_search_24"
         android:drawablePadding="10dp"
+        android:drawableRight="@drawable/ic_baseline_cancel_24"
         />
-
     <LinearLayout
         android:id="@+id/linearLayoutHomeFrag"
         android:layout_width="match_parent"

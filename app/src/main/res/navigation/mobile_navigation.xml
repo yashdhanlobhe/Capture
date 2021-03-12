@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.capture.ui.home.HomeFragment"
+        android:name="com.boss.capture.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.capture.ui.dashboard.DashboardFragment"
+        android:name="com.boss.capture.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.capture.ui.settings.SettingsFragment"
+        android:name="com.boss.capture.ui.settings.SettingsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_setting" />
 
     <fragment
         android:id="@+id/navigation_capture"
-        android:name="com.example.capture.ui.capture.CaptureFragment"
+        android:name="com.boss.capture.ui.capture.CaptureFragment"
         android:label="Capture"
         tools:layout="@layout/fragment_discover" />
 
