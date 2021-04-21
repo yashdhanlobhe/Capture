@@ -9,7 +9,7 @@ public class NotificationChannel {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "notification";
             String description = "download";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_MIN;
             android.app.NotificationChannel channel = new android.app.NotificationChannel("1", name, importance);
             channel.setDescription(description);
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
