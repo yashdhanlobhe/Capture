@@ -1,3 +1,9 @@
+<p align="center">
+<img src="/readmeSS/ss/poster.png"/>
+</p>
+
+
+
 <p align="center" >
 <img src="/readmeSS/ss/1.jpg"width="20%" height="10%"/>
 <img src="/readmeSS/ss/2.jpg" width="20%" height="10%"/>
