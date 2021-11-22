@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.boss.capture.DownloadImage.DownloadImageBitmap;
+import com.boss.capture.DownloadImage.DownloadImage;
 import com.boss.capture.R;
 import com.boss.capture.Services.GetStorageFileNames;
 import com.squareup.picasso.Picasso;
@@ -124,7 +124,7 @@ public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ImageAdapte
                                 try
                                 {   downloaded.add(name);
                                     GetStorageFileNames.GetDownloadedFilesNames().add(name);
-                                    new DownloadImageBitmap(jsonObject1.getString("full"), jsonObject.getString("id") , mcontext);
+                                    new DownloadImage(jsonObject1.getString("full"), jsonObject.getString("id") , mcontext);
                                 }
                                 catch (Exception e)
                                 {
